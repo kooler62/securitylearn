@@ -38,4 +38,13 @@ class SecurityController extends Controller
             )
         );
     }
+
+    /**
+     * @Route("/logout", name="security_logout")
+     */
+    public function logoutAction ()
+    {
+        throw new \Exception('this is not be rich');
+    }
+
 }

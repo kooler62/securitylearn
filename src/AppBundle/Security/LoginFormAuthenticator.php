@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
@@ -43,6 +44,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $form=$this->formFactory->create(LoginForm::class);
         $form->handleRequest($request);
         $data=$form->getData();
+        $request->getSession()->set(Security::LAST_USERNAME,$data['_username']);
         return $data;
 
     }
@@ -82,6 +84,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
 
         if (!$targetPath) {
+            dump('good');
             $targetPath = $this->router->generate('homepage');
         }
 
