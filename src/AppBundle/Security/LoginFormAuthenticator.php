@@ -69,14 +69,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return true;
 
         }
-        return true;
-        //return false;
+       // return true;
+        return false;
     }
 
     //bad auht
     protected function getLoginUrl()
     {
-        dump('bad');
+        //dump('bad');
         return $this->router->generate('security_login');
 
     }
@@ -90,7 +90,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
 
         if (!$targetPath) {
-            dump('good');
+           // dump('good');
             $targetPath = $this->router->generate('homepage');
         }
 
